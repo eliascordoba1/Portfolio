@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px #ccc;
+      border-radius: 5px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 5px 0 0 5px;
+      border: none;
+      background-color: #f9f9f9;
+    }
+
+    button[type="submit"] {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #3e8e41;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      box-shadow: 0px 0px 5px #ccc;
+    }
+
+    li input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    li.completed {
+      background-color: #e5e5e5;
+    }
+
+    li.completed label {
+      text-decoration: line-through;
+      color: #999;
+    }
+
+    li button {
+      margin-left: auto;
+      padding: 5px 10px;
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    li button:hover {
+      background-color: #cc2b27;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h1>To-Do List</h1>
+      <form id="todo-form">
+        <input type="text" id="todo-input" placeholder="Enter a task..." />
+        <button type="submit" id="add-btn">Add</button>
+      </form>
+      <ul id="todo-list"></ul>
+    </div>
+    <script>
+      const form = document.querySelector("#todo-form");
+      const input = document.querySelector("#todo-input");
+      const todoList = document.querySelector("#todo-list");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const text = input.value.trim();
+        if (text === "") return;
+        const todo = createTodoItem(text);
+        todoList.appendChild(todo);
+        input.value = "";
+      });
+
+      function createTodoItem(text) {
+        const todo = document.createElement("li");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.addEventListener("change", (e) => {
+          todo.classList.toggle("completed", e.target.checked);
+        });
+        const label = document.createElement("label");
+        label.innerText = text;
+        const button = document.createElement("button");
+        button.innerText = "Delete";
+        button.addEventListener("click", () => {
+          todo.remove();
+        });
+        todo.appendChild(checkbox);
+        todo.appendChild(label);
+        todo.appendChild(button);
+        return todo;
+      }
+    </script>
+  </body>
+</html>

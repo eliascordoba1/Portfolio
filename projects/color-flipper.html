@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #fff5e4;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .heading {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: #850e35;
+      transition: color 0.5s ease;
+    }
+
+    .btn {
+      font-size: 2rem;
+      padding: 1rem 2rem;
+      border: none;
+      background-color: #ee6983;
+      color: #fff5e4;
+      cursor: pointer;
+      transition: background-color 0.5s ease;
+    }
+
+    .btn:hover {
+      background-color: #ffc4c4;
+      color: #850e35;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h1 class="heading">Color Flipper</h1>
+      <button class="btn" id="btn">Flip Me!</button>
+    </div>
+  </body>
+  <script>
+    const btn = document.getElementById("btn");
+    const body = document.querySelector("body");
+    const heading = document.querySelector(".heading");
+    const colors = [
+      "#00FFFF",
+      "#7FFFD4",
+      "#F08080",
+      "#FFD700",
+      "#8FBC8F",
+      "#F0E68C",
+      "#FFF5E4",
+      "#FFC4C4",
+      "#EE6983",
+      "#850E35",
+    ];
+
+    btn.addEventListener("click", changeColor);
+
+    function changeColor() {
+      const colorIndex = parseInt(Math.random() * colors.length);
+      body.style.backgroundColor = colors[colorIndex];
+
+      // Change the color of the heading to contrast with the background color
+      const bgColor =
+        getComputedStyle(body).getPropertyValue("background-color");
+      const textColor = getContrastColor(bgColor);
+      heading.style.color = textColor;
+    }
+
+    // Function to get the contrast color (black or white) based on a given background color
+    function getContrastColor(bgColor) {
+      // Convert color to RGB format
+      const rgbColor = bgColor.match(/\d+/g);
+      const brightness =
+        (299 * rgbColor[0] + 587 * rgbColor[1] + 114 * rgbColor[2]) / 1000;
+
+      // Use black or white text color depending on the brightness of the background color
+      return brightness > 128 ? "#000" : "#FFF";
+    }
+  </script>
+</html>

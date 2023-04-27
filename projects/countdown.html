@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countdown</title>
+  </head>
+  <style>
+    .countdown-clock {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+    }
+
+    .countdown-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 1rem;
+    }
+
+    .countdown-section-label {
+      font-size: 0.8rem;
+    }
+
+    .countdown-section-value {
+      font-size: 1.5rem;
+    }
+
+    body {
+      background-color: #fde2f3;
+    }
+
+    .countdown-clock {
+      margin: 50px auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      font-size: 3rem;
+      font-weight: bold;
+      color: #2a2f4f;
+    }
+
+    .countdown-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 20px;
+    }
+
+    .countdown-section-label {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #917fb3;
+    }
+
+    .countdown-section-value {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #e5beec;
+    }
+
+    button {
+      font-size: 0.7rem;
+      background-color: #917fb3;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      margin: 0.5rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e5beec;
+    }
+  </style>
+  <body>
+    <h1 style="text-align: center; color: #2a2f4f">Countdown</h1>
+    <div class="countdown-clock">
+      <div class="countdown-section">
+        <div class="countdown-section-label">Days</div>
+        <div class="countdown-section-value" id="countdown-days"></div>
+      </div>
+      <div class="countdown-section">
+        <div class="countdown-section-label">Hours</div>
+        <div class="countdown-section-value" id="countdown-hours"></div>
+      </div>
+      <div class="countdown-section">
+        <div class="countdown-section-label">Minutes</div>
+        <div class="countdown-section-value" id="countdown-minutes"></div>
+      </div>
+      <div class="countdown-section">
+        <div class="countdown-section-label">Seconds</div>
+        <div class="countdown-section-value" id="countdown-seconds"></div>
+      </div>
+    </div>
+    <div style="text-align: center">
+      <button onclick="addTime(1 * 60)">Add 1 minute</button>
+      <button onclick="addTime(1 * 60 * 60)">Add 1 hour</button>
+      <button onclick="addTime(1 * 60 * 60 * 24)">Add 1 day</button>
+      <button onclick="addTime(1)">Add 1 second</button>
+    </div>
+    <script>
+      // Set the date we're counting down to
+      var countDownDate = new Date("Jan 1, 2024 00:00:00").getTime();
+
+      // Update the countdown every 1 second
+      var x = setInterval(function () {
+        // Get the current date and time
+        var now = new Date().getTime();
+
+        // Calculate the distance between now and the countdown date
+        var distance = countDownDate - now;
+
+        // Calculate the days, hours, minutes, and seconds remaining
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in the corresponding divs
+        document.getElementById("countdown-days").innerHTML = days;
+        document.getElementById("countdown-hours").innerHTML = hours;
+        document.getElementById("countdown-minutes").innerHTML = minutes;
+        document.getElementById("countdown-seconds").innerHTML = seconds;
+
+        // If the countdown is finished, display "Expired"
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("countdown-clock").innerHTML = "Expired";
+        }
+      }, 1000);
+
+      // Add time function
+      function addTime(time) {
+        countDownDate += time * 1000;
+      }
+    </script>
+  </body>
+</html>

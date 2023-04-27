@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRAZZYY</title>
+  </head>
+  <style>
+    body {
+      background-color: black;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    #video-background video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #particles-js {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+  </style>
+  <body>
+    <div id="video-background">
+      <video autoplay muted loop>
+        <source src="../images/videos/video.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div id="particles-js"></div>
+    <audio id="miAudio" autoplay loop>
+      <source src="../images/videos/song.mp3" type="audio/mpeg" />
+    </audio>
+    <!-- Particles -->
+    <script src="js/particles.js-master/particles.min.js"></script>
+    <script src="js/particles.js-master/particles.js"></script>
+    <script src="js/particles.js-master/demo/js/app.js"></script>
+    <!-- -->
+    <script>
+      var miAudio = document.getElementById("miAudio");
+      document.addEventListener("click", function () {
+        miAudio.play();
+      });
+    </script>
+  </body>
+</html>

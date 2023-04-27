@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <style type="text/css">
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+
+      #calculator {
+        display: inline-block;
+        background-color: #eee;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      #display {
+        font-size: 24px;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 5px;
+        text-align: right;
+        background-color: #f0f0f0;
+        color: #333;
+        text-align: center; /* center the text horizontally */
+        width: 100%; /* make the element fill the parent's width */
+      }
+
+      .button {
+        font-size: 24px;
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        border-radius: 50%;
+        border: none;
+        background-color: #ccc;
+        color: #333;
+        cursor: pointer;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .operation {
+        background-color: #f0ad4e;
+        color: #fff;
+      }
+
+      #clear {
+        background-color: #d9534f;
+        color: #fff;
+      }
+
+      #equals {
+        background-color: #5cb85c;
+        color: #fff;
+      }
+
+      .button:hover {
+        background-color: #ddd;
+        color: #333;
+      }
+
+      .button:active {
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        transform: translateY(2px);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="calculator">
+      <input type="text" id="display" disabled />
+      <button class="button operation" onclick="addToDisplay('/')">/</button>
+      <button class="button operation" onclick="addToDisplay('*')">*</button>
+      <button class="button operation" onclick="addToDisplay('-')">-</button>
+      <button class="button operation" onclick="addToDisplay('+')">+</button>
+      <button class="button" onclick="addToDisplay('0')">0</button>
+      <button class="button" onclick="addToDisplay('1')">1</button>
+      <button class="button" onclick="addToDisplay('2')">2</button>
+      <button class="button" onclick="addToDisplay('3')">3</button>
+      <button class="button" onclick="addToDisplay('4')">4</button>
+      <button class="button" onclick="addToDisplay('5')">5</button>
+      <button class="button" onclick="addToDisplay('6')">6</button>
+      <button class="button" onclick="addToDisplay('7')">7</button>
+      <button class="button" onclick="addToDisplay('8')">8</button>
+      <button class="button" onclick="addToDisplay('9')">9</button>
+      <button class="button" onclick="addToDisplay('.')">.</button>
+      <button class="button" id="clear" onclick="clearDisplay()">C</button>
+      <button class="button operation" id="equals" onclick="calculate()">
+        =
+      </button>
+    </div>
+
+    <script type="text/javascript">
+      function addToDisplay(value) {
+        document.getElementById("display").value += value;
+      }
+
+      function clearDisplay() {
+        document.getElementById("display").value = "";
+      }
+
+      function calculate() {
+        try {
+          var result = eval(document.getElementById("display").value);
+          if (isNaN(result)) {
+            throw "Invalid expression";
+          }
+          document.getElementById("display").value = result;
+        } catch (error) {
+          document.getElementById("display").value = "Error: " + error;
+        }
+      }
+    </script>
+  </body>
+</html>
